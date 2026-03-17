@@ -1,0 +1,182 @@
+{
+  "list": [
+    {
+      "name": "Munkahelyi elégedettség felmérés",
+      "closed": false,
+      "steps": [
+        {
+          "title": "Általános információk",
+          "categories": [
+            {
+              "name": "Személyes adatok",
+              "description": "Kérjük, adja meg a személyes adatait",
+              "questions": [
+                {
+                  "label": "Név",
+                  "type": "text",
+                  "validators": [
+                    {
+                      "type": "required"
+                    },
+                    {
+                      "type": "minlength",
+                      "data": 3
+                    }
+                  ]
+                },
+                {
+                  "label": "Életkor",
+                  "type": "number",
+                  "validators": [
+                    {
+                      "type": "min",
+                      "data": 18
+                    },
+                    {
+                      "type": "max",
+                      "data": 65
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Munkahelyi környezet",
+          "categories": [
+            {
+              "name": "Kényelmi szempontok",
+              "description": "Értékelje a munkahelyi környezetet",
+              "questions": [
+                {
+                  "label": "Elégedett a munkahelyi légkörrel?",
+                  "type": "checkbox"
+                },
+                {
+                  "label": "Hány órát tölt naponta a számítógép előtt?",
+                  "type": "number",
+                  "validators": [
+                    {
+                      "type": "min",
+                      "data": 0
+                    },
+                    {
+                      "type": "max",
+                      "data": 12
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Ügyfél elégedettség kérdőív",
+      "closed": false,
+      "steps": [
+        {
+          "title": "Szolgáltatások értékelése",
+          "categories": [
+            {
+              "name": "Általános vélemény",
+              "description": "Kérjük, értékelje a szolgáltatásokat",
+              "questions": [
+                {
+                  "label": "Mennyire elégedett a szolgáltatás minőségével?",
+                  "type": "select",
+                  "selectOptions": [
+                    "Nagyon elégedett",
+                    "Elégedett",
+                    "Közepes",
+                    "Elégedetlen",
+                    "Nagyon elégedetlen"
+                  ],
+                  "validators": [
+                    {
+                      "type": "required"
+                    }
+                  ]
+                },
+                {
+                  "label": "Ajánlaná a szolgáltatást másoknak?",
+                  "type": "checkbox"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Javaslatok",
+          "categories": [
+            {
+              "name": "Visszajelzés",
+              "description": "Adjon további javaslatokat",
+              "questions": [
+                {
+                  "label": "Mit javítanál a szolgáltatáson?",
+                  "type": "text",
+                  "validators": [
+                    {
+                      "type": "maxlength",
+                      "data": 200
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Éves teljesítmény értékelés",
+      "closed": true,
+      "steps": [
+        {
+          "title": "Teljesítmény értékelése",
+          "categories": [
+            {
+              "name": "Feladatok",
+              "description": "Értékelje a feladatok teljesítését",
+              "questions": [
+                {
+                  "label": "Mennyire voltak időben teljesítve a feladatok?",
+                  "type": "select",
+                  "selectOptions": [
+                    "Mindig időben",
+                    "Többségében időben",
+                    "Ritkán időben",
+                    "Sosem időben"
+                  ],
+                  "validators": [
+                    {
+                      "type": "required"
+                    }
+                  ]
+                },
+                {
+                  "label": "Minősítse az együttműködést a csapattal",
+                  "type": "select",
+                  "selectOptions": [
+                    "Kiváló",
+                    "Jó",
+                    "Közepes",
+                    "Gyenge"
+                  ],
+                  "validators": [
+                    {
+                      "type": "required"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

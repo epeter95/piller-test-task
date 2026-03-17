@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 import {FormLayoutComponent} from './layout/form-layout/form-layout.component';
 import {FormListComponent} from './pages/form-list/form-list.component';
 import {FormWizardComponent} from './pages/form-wizard/form-wizard.component';
@@ -13,7 +13,7 @@ export const FORM_ROUTES: Routes = [
         component: FormListComponent
       },
       {
-        path: ':name',
+        path: ':slug',
         component: FormWizardComponent
       }
     ]

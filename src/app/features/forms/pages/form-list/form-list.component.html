@@ -1,1 +1,5 @@
-<p>form-list works!</p>
+@if (formList()?.list; as list) {
+  @for (form of list; track form.name) {
+    <a [routerLink]="'/forms/'+toSlug(form.name)">{{ form.name }}</a>
+  }
+}

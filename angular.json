@@ -11,7 +11,8 @@
       "schematics": {
         "@schematics/angular:component": {
           "type": "component",
-          "style": "scss"
+          "style": "scss",
+          "changeDetection": "OnPush"
         },
         "@schematics/angular:service": {
           "type": "service"
