@@ -3,19 +3,18 @@
     <h1>{{ formElement.name }}</h1>
     <mat-stepper [orientation]="orientation()" #stepper linear>
       @for (step of formElement.steps; track step.title) {
-        <mat-step [stepControl]="form.controls[step.id]">
-          <ng-template matStepLabel>
-            {{ step.title }}
-          </ng-template>
+        <mat-step [label]="step.title" [stepControl]="form.controls[step.id]">
           @for (category of step.categories; track category.name) {
             <app-category
               [category]="category"
               [stepGroup]="getStepGroup(step.id)"/>
           }
           <div class="stepper-buttons">
-            <button mat-button matStepperPrevious>
-              Vissza
-            </button>
+            @if (stepper.selectedIndex > 0) {
+              <button mat-button matStepperPrevious>
+                Vissza
+              </button>
+            }
 
             <button mat-button matStepperNext
                     [disabled]="form.controls[step.id].invalid">
@@ -26,9 +25,7 @@
 
         </mat-step>
       }
-      <mat-step>
-        <ng-template matStepLabel>Kitöltés kész</ng-template>
-
+      <mat-step label="Kitöltés kész">
         <p>Az űrlap kitöltése sikeres!</p>
         <div class="stepper-buttons">
           <button mat-button (click)="stepper.reset()">

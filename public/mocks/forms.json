@@ -116,6 +116,22 @@
                   "type": "checkbox"
                 }
               ]
+            },
+            {
+              "name": "Adatkezelés",
+              "description": "Kérjük, fogadja el a kötelező mezőket",
+              "questions": [
+                {
+                  "id": "q3",
+                  "label": "Elfogadom az adatkezelési tájékoztatót",
+                  "type": "checkbox",
+                  "validators": [
+                    {
+                      "type": "required"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -134,7 +150,7 @@
                   "validators": [
                     {
                       "type": "maxlength",
-                      "data": 200
+                      "data": 50
                     }
                   ]
                 }

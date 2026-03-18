@@ -1,7 +1,6 @@
 import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {FormService} from '../../services/form.service';
 import {toSignal} from '@angular/core/rxjs-interop';
-import {toSlug} from '../../../../shared/utilities/slug';
 import {RouterLink} from '@angular/router';
 import {
   MatCell,
@@ -16,6 +15,7 @@ import {
   MatTable
 } from '@angular/material/table';
 import {MatButton} from '@angular/material/button';
+import {toSlug} from '../../../../shared/utils/slug.util';
 
 @Component({
   selector: 'app-form-list',

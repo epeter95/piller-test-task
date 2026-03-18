@@ -1,0 +1,22 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.question {
+  margin-bottom: 1rem;
+
+  .required {
+    color: var(--mat-sys-error);
+  }
+
+  .full-width {
+    width: 100%;
+  }
+
+  .error-text {
+    color: var(--mat-sys-error);
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+  }
+}

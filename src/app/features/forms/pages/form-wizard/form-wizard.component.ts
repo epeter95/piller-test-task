@@ -2,20 +2,20 @@ import {ChangeDetectionStrategy, Component, computed, inject} from '@angular/cor
 import {FormService} from '../../services/form.service';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {ActivatedRoute, RouterLink} from '@angular/router';
-import {MatStep, MatStepLabel, MatStepper, MatStepperNext, MatStepperPrevious} from '@angular/material/stepper';
+import {MatStep, MatStepper, MatStepperNext, MatStepperPrevious} from '@angular/material/stepper';
 import {MatButton} from '@angular/material/button';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {map, tap} from 'rxjs';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Form, QuestionType, QuestionValidator} from '../../models/form.model';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {Form, QuestionType} from '../../models/form.model';
 import {CategoryComponent} from '../../components/category/category.component';
+import {mapValidators} from '../../utils/form-validator.util';
 
 @Component({
   selector: 'app-form-wizard',
   imports: [
     MatStep,
     MatStepper,
-    MatStepLabel,
     MatButton,
     RouterLink,
     CategoryComponent,
@@ -43,7 +43,6 @@ export class FormWizardComponent {
     tap(form => {
       if (form) {
         this.buildForm(form);
-        console.log(this.form.value);
       }
     })
   ));
@@ -63,7 +62,7 @@ export class FormWizardComponent {
         category.questions.forEach(question => {
           controls[question.id] = this.fb.control(
             this.getInitialControlValue(question.type),
-            this.mapValidators(question.validators)
+            mapValidators(question)
           );
         });
       });
@@ -86,24 +85,5 @@ export class FormWizardComponent {
         return '';
       }
     }
-  }
-
-  private mapValidators(validators?: QuestionValidator[]) {
-    if (!validators) return [];
-
-    return validators.map(validator => {
-      switch (validator.type) {
-        case 'required':
-          return Validators.required;
-        case 'min':
-          return Validators.min(Number(validator.data));
-        case 'max':
-          return Validators.max(Number(validator.data));
-        case 'minlength':
-          return Validators.minLength(Number(validator.data));
-        case 'maxlength':
-          return Validators.maxLength(Number(validator.data));
-      }
-    });
   }
 }
