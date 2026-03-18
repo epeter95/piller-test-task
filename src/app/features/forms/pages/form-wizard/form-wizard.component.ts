@@ -1,12 +1,13 @@
-import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import {ChangeDetectionStrategy, Component, computed, inject} from '@angular/core';
 import {FormService} from '../../services/form.service';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {MatStep, MatStepLabel, MatStepper} from '@angular/material/stepper';
 import {MatButton} from '@angular/material/button';
 import {BreakpointObserver} from '@angular/cdk/layout';
-import {map} from 'rxjs';
-import {toSlug} from '../../../../shared/utilities/slug';
+import {map, tap} from 'rxjs';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Form, QuestionType, QuestionValidator} from '../../models/form.model';
 
 @Component({
   selector: 'app-form-wizard',
@@ -24,12 +25,82 @@ import {toSlug} from '../../../../shared/utilities/slug';
 export class FormWizardComponent {
   formService = inject(FormService);
   breakpointObserver = inject(BreakpointObserver);
-  isMobile = toSignal(
+  formId = inject(ActivatedRoute).snapshot.params['id'];
+  private readonly isMobile = toSignal(
     this.breakpointObserver.observe('(max-width: 768px)')
       .pipe(map(result => result.matches)),
     {initialValue: false}
   );
-  slug = inject(ActivatedRoute).snapshot.params['slug'];
-  form = toSignal(this.formService.getForm(this.slug));
-  protected readonly toSlug = toSlug;
+  orientation = computed(() =>
+    this.isMobile() ? 'vertical' : 'horizontal'
+  );
+  formElement = toSignal(this.formService.getForm(this.formId).pipe(
+    tap(form => {
+      if (form) {
+        this.buildForm(form);
+        console.log(this.form.value);
+      }
+    })
+  ));
+  form!: FormGroup;
+
+  private buildForm(formElement: Form) {
+    const stepGroups: Record<string, FormGroup> = {};
+
+    formElement.steps.forEach((step) => {
+      const controls: Record<string, FormControl> = {};
+
+      step.categories.forEach(category => {
+        category.questions.forEach(question => {
+          controls[question.id] = new FormControl(
+            this.getInitialControlValue(question.type),
+            this.mapValidators(question.validators)
+          );
+        });
+      });
+
+      stepGroups[step.id] = new FormGroup(controls);
+    });
+
+    this.form = new FormGroup(stepGroups);
+  }
+
+  private getInitialControlValue(type: QuestionType) {
+    switch (type) {
+      case 'text': {
+        return '';
+      }
+      case 'number': {
+        return null;
+      }
+      case 'checkbox': {
+        return false
+      }
+      case 'select': {
+        return '';
+      }
+      default: {
+        return null;
+      }
+    }
+  }
+
+  private mapValidators(validators?: QuestionValidator[]) {
+    if (!validators) return [];
+
+    return validators.map(validator => {
+      switch (validator.type) {
+        case 'required':
+          return Validators.required;
+        case 'min':
+          return Validators.min(Number(validator.data));
+        case 'max':
+          return Validators.max(Number(validator.data));
+        case 'minlength':
+          return Validators.minLength(Number(validator.data));
+        case 'maxlength':
+          return Validators.maxLength(Number(validator.data));
+      }
+    });
+  }
 }

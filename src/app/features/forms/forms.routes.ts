@@ -13,8 +13,12 @@ export const FORM_ROUTES: Routes = [
         component: FormListComponent
       },
       {
-        path: ':slug',
+        path: ':id/:slug',
         component: FormWizardComponent
+      },
+      {
+        path: '**',
+        redirectTo: 'forms',
       }
     ]
   }

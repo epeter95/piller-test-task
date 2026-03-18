@@ -1,10 +1,12 @@
 {
   "list": [
     {
+      "id": "f1",
       "name": "Munkahelyi elégedettség felmérés",
       "closed": false,
       "steps": [
         {
+          "id": "s1",
           "title": "Általános információk",
           "categories": [
             {
@@ -12,6 +14,7 @@
               "description": "Kérjük, adja meg a személyes adatait",
               "questions": [
                 {
+                  "id": "q1",
                   "label": "Név",
                   "type": "text",
                   "validators": [
@@ -25,6 +28,7 @@
                   ]
                 },
                 {
+                  "id": "q2",
                   "label": "Életkor",
                   "type": "number",
                   "validators": [
@@ -43,6 +47,7 @@
           ]
         },
         {
+          "id": "s2",
           "title": "Munkahelyi környezet",
           "categories": [
             {
@@ -50,10 +55,12 @@
               "description": "Értékelje a munkahelyi környezetet",
               "questions": [
                 {
+                  "id": "q1",
                   "label": "Elégedett a munkahelyi légkörrel?",
                   "type": "checkbox"
                 },
                 {
+                  "id": "q2",
                   "label": "Hány órát tölt naponta a számítógép előtt?",
                   "type": "number",
                   "validators": [
@@ -74,10 +81,12 @@
       ]
     },
     {
+      "id": "f2",
       "name": "Ügyfél elégedettség kérdőív",
       "closed": false,
       "steps": [
         {
+          "id": "s1",
           "title": "Szolgáltatások értékelése",
           "categories": [
             {
@@ -85,6 +94,7 @@
               "description": "Kérjük, értékelje a szolgáltatásokat",
               "questions": [
                 {
+                  "id": "q1",
                   "label": "Mennyire elégedett a szolgáltatás minőségével?",
                   "type": "select",
                   "selectOptions": [
@@ -101,6 +111,7 @@
                   ]
                 },
                 {
+                  "id": "q2",
                   "label": "Ajánlaná a szolgáltatást másoknak?",
                   "type": "checkbox"
                 }
@@ -109,6 +120,7 @@
           ]
         },
         {
+          "id": "s2",
           "title": "Javaslatok",
           "categories": [
             {
@@ -116,6 +128,7 @@
               "description": "Adjon további javaslatokat",
               "questions": [
                 {
+                  "id": "q1",
                   "label": "Mit javítanál a szolgáltatáson?",
                   "type": "text",
                   "validators": [
@@ -132,10 +145,12 @@
       ]
     },
     {
+      "id": "f3",
       "name": "Éves teljesítmény értékelés",
       "closed": true,
       "steps": [
         {
+          "id": "s1",
           "title": "Teljesítmény értékelése",
           "categories": [
             {
@@ -143,6 +158,7 @@
               "description": "Értékelje a feladatok teljesítését",
               "questions": [
                 {
+                  "id": "q1",
                   "label": "Mennyire voltak időben teljesítve a feladatok?",
                   "type": "select",
                   "selectOptions": [
@@ -158,6 +174,7 @@
                   ]
                 },
                 {
+                  "id": "q2",
                   "label": "Minősítse az együttműködést a csapattal",
                   "type": "select",
                   "selectOptions": [

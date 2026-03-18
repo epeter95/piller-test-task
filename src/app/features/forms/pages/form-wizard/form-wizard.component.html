@@ -1,9 +1,9 @@
-@if (form(); as form) {
+@if (formElement(); as formElement) {
   <div class="form-wizard">
-    <h1>{{ form.name }}</h1>
-    <mat-stepper [orientation]="isMobile() ? 'vertical' : 'horizontal'" #stepper linear>
-      @for (step of form.steps; track step.title) {
-        <mat-step>
+    <h1>{{ formElement.name }}</h1>
+    <mat-stepper [orientation]="orientation()" #stepper linear>
+      @for (step of formElement.steps; track step.title) {
+        <mat-step [stepControl]="form.controls[step.id]">
           <ng-template matStepLabel>
             {{ step.title }}
           </ng-template>

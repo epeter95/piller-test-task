@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 
 export const routes: Routes = [
   {
@@ -7,7 +7,7 @@ export const routes: Routes = [
       import('./features/forms/forms.routes').then(m => m.FORM_ROUTES),
   },
   {
-    path: '',
+    path: '**',
     redirectTo: 'forms',
     pathMatch: 'full'
   }

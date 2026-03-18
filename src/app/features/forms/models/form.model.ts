@@ -3,12 +3,14 @@ export interface FormList {
 }
 
 export interface Form {
+  id: string;
   name: string;
   steps: Array<Step>;
   closed: boolean;
 }
 
 export interface Step {
+  id: string;
   title: string;
   categories: Array<Category>;
 }
@@ -20,16 +22,19 @@ export interface Category {
 }
 
 export interface Question {
+  id: string;
   label: string;
   description?: string;
   type: QuestionType;
   selectOptions?: Array<string>;
-  validators?: Array<{
-    type: ValidatorType;
-    data?: string | number;
-  }>;
+  validators?: Array<QuestionValidator>;
 }
 
-type QuestionType = 'text' | 'number' | 'checkbox' | 'select';
+export interface QuestionValidator {
+  type: ValidatorType;
+  data?: string | number;
+}
+
+export type QuestionType = 'text' | 'number' | 'checkbox' | 'select';
 
 type ValidatorType = 'required' | 'min' | 'max' | 'minlength' | 'maxlength';
