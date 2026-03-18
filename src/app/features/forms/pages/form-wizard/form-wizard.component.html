@@ -1,3 +1,26 @@
 @if (form(); as form) {
-  <p>{{ form.name }}</p>
+  <div class="form-wizard">
+    <h1>{{ form.name }}</h1>
+    <mat-stepper [orientation]="isMobile() ? 'vertical' : 'horizontal'" #stepper linear>
+      @for (step of form.steps; track step.title) {
+        <mat-step>
+          <ng-template matStepLabel>
+            {{ step.title }}
+          </ng-template>
+
+        </mat-step>
+      }
+      <mat-step>
+        <ng-template matStepLabel>Kitöltés kész</ng-template>
+
+        <p>Az űrlap kitöltése sikeres!</p>
+        <div class="final-buttons">
+          <button mat-button (click)="stepper.reset()">
+            Újra
+          </button>
+          <a matButton="filled" routerLink="/forms">Rendben</a>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </div>
 }
