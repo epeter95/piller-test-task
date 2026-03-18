@@ -32,7 +32,7 @@ export class FormWizardComponent {
   formService = inject(FormService);
   snackBar = inject(MatSnackBar);
   breakpointObserver = inject(BreakpointObserver);
-  formId = inject(ActivatedRoute).snapshot.params['id'];
+  formId = inject(ActivatedRoute).snapshot.paramMap.get('id')!;
   private readonly isMobile = toSignal(
     this.breakpointObserver.observe('(max-width: 768px)')
       .pipe(map(result => result.matches)),
@@ -54,7 +54,7 @@ export class FormWizardComponent {
     return this.form.controls[stepId] as FormGroup;
   }
 
-  private buildForm(formElement: Form) {
+  buildForm(formElement: Form) {
     const stepGroups: Record<string, FormGroup> = {};
 
     formElement.steps.forEach((step) => {

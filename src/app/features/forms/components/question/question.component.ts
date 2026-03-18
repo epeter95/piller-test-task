@@ -31,12 +31,15 @@ export class QuestionComponent {
   }
 
   getErrorMessage(): string | null {
-    if (!this.questionControl()?.errors || !this.questionControl().touched || this.questionControl().hasError('required')) {
+    if (!this.questionControl()?.errors || !this.questionControl().touched) {
       return null;
     }
 
     const errors = this.questionControl().errors;
     if (errors) {
+      if (errors['required']) {
+        return 'Kötelező mező';
+      }
       if (errors['min']) {
         return `Minimum érték: ${errors['min'].min}`;
       }
