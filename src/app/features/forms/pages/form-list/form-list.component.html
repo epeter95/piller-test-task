@@ -1,5 +1,41 @@
 @if (formList()?.list; as list) {
-  @for (form of list; track form.name) {
-    <a [routerLink]="'/forms/'+toSlug(form.name)">{{ form.name }}</a>
-  }
+  <div class="form-list">
+    <h1>Kitöltendő űrlapok</h1>
+    <table mat-table [dataSource]="list">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Név</th>
+        <td mat-cell *matCellDef="let element">
+          <span class="mobile-label">Név: </span>
+          {{ element.name }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="stepsCount">
+        <th mat-header-cell *matHeaderCellDef>Lépések</th>
+        <td mat-cell *matCellDef="let element">
+          <span class="mobile-label">Lépések: </span>
+          {{ element.steps.length }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Státusz</th>
+        <td mat-cell *matCellDef="let element">
+          <span class="mobile-label">Státusz: </span>
+          {{ element.closed ? 'Zárt' : 'Nyitott' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Részletek</th>
+        <td mat-cell *matCellDef="let element">
+          <a [disabled]="element.closed" matButton="filled" [routerLink]="'/forms/'+toSlug(element.name)">Megnézem</a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
 }
+

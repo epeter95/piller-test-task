@@ -1,0 +1,52 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.form-list {
+  max-width: 75rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.mobile-label {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mat-mdc-header-row {
+    display: none;
+  }
+
+  .mat-mdc-row {
+    display: block;
+    margin: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    background: white;
+    height: auto;
+  }
+
+  .mat-mdc-cell {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--mat-sys-on-surface);
+  }
+
+  .mat-mdc-cell:last-child {
+    border-bottom: none;
+    justify-content: center;
+  }
+
+  .mobile-label {
+    display: inline;
+    font-weight: 600;
+  }
+
+  button {
+    width: 100%;
+  }
+}
