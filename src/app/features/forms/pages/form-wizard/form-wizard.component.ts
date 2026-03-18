@@ -10,6 +10,7 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {Form, QuestionType} from '../../models/form.model';
 import {CategoryComponent} from '../../components/category/category.component';
 import {mapValidators} from '../../utils/form-validator.util';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-form-wizard',
@@ -29,6 +30,7 @@ import {mapValidators} from '../../utils/form-validator.util';
 export class FormWizardComponent {
   fb = inject(FormBuilder);
   formService = inject(FormService);
+  snackBar = inject(MatSnackBar);
   breakpointObserver = inject(BreakpointObserver);
   formId = inject(ActivatedRoute).snapshot.params['id'];
   private readonly isMobile = toSignal(
@@ -84,6 +86,19 @@ export class FormWizardComponent {
       default: {
         return '';
       }
+    }
+  }
+
+  showToast() {
+    this.snackBar.open('A űrlap sikeresen elküldve!', 'Bezár', {duration: 3000, verticalPosition: 'top'});
+  }
+
+  getReviewFormValue(stepId: string, questionId: string) {
+    const value = this.form.get(stepId)?.get(questionId)?.value;
+    if (typeof value === 'boolean') {
+      return value ? 'Igen' : 'Nem';
+    } else {
+      return value;
     }
   }
 }

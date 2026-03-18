@@ -25,13 +25,24 @@
 
         </mat-step>
       }
-      <mat-step label="Kitöltés kész">
-        <p>Az űrlap kitöltése sikeres!</p>
+      <mat-step label="Ellenőrzés">
+        <div class="review">
+          <p>Ellenőrizze az adatait:</p>
+          @for (step of formElement.steps; track step.id) {
+            <h3>{{ step.title }}</h3>
+            @for (category of step.categories; track category.name) {
+              <strong>{{ category.name }}</strong>
+              <ul>
+                @for (question of category.questions; track question.id) {
+                  <li>{{ question.label }}: {{ getReviewFormValue(step.id, question.id) }}</li>
+                }
+              </ul>
+            }
+          }
+        </div>
         <div class="stepper-buttons">
-          <button mat-button (click)="stepper.reset()">
-            Újra
-          </button>
-          <a matButton="filled" routerLink="/forms">Rendben</a>
+          <button mat-button matStepperPrevious>Vissza</button>
+          <a (click)="showToast()" matButton="filled" routerLink="/forms">Küldés</a>
         </div>
       </mat-step>
     </mat-stepper>
