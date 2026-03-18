@@ -1,0 +1,14 @@
+@if (category(); as category) {
+  <div class="category">
+
+    <h3>{{ category.name }}</h3>
+    <p class="description">{{ category.description }}</p>
+
+    @for (question of category.questions; track question.id) {
+      <app-question
+        [question]="question">
+      </app-question>
+    }
+
+  </div>
+}

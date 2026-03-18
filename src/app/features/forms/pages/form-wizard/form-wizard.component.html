@@ -7,6 +7,22 @@
           <ng-template matStepLabel>
             {{ step.title }}
           </ng-template>
+          @for (category of step.categories; track category.name) {
+            <app-category
+              [category]="category">
+            </app-category>
+          }
+          <div class="stepper-buttons">
+            <button mat-button matStepperPrevious>
+              Vissza
+            </button>
+
+            <button mat-button matStepperNext
+                    [disabled]="form.controls[step.id].invalid">
+              Következő
+            </button>
+          </div>
+
 
         </mat-step>
       }
@@ -14,7 +30,7 @@
         <ng-template matStepLabel>Kitöltés kész</ng-template>
 
         <p>Az űrlap kitöltése sikeres!</p>
-        <div class="final-buttons">
+        <div class="stepper-buttons">
           <button mat-button (click)="stepper.reset()">
             Újra
           </button>

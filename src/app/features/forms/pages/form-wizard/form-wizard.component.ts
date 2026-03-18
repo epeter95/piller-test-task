@@ -2,12 +2,13 @@ import {ChangeDetectionStrategy, Component, computed, inject} from '@angular/cor
 import {FormService} from '../../services/form.service';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {ActivatedRoute, RouterLink} from '@angular/router';
-import {MatStep, MatStepLabel, MatStepper} from '@angular/material/stepper';
+import {MatStep, MatStepLabel, MatStepper, MatStepperNext, MatStepperPrevious} from '@angular/material/stepper';
 import {MatButton} from '@angular/material/button';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {map, tap} from 'rxjs';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Form, QuestionType, QuestionValidator} from '../../models/form.model';
+import {CategoryComponent} from '../../components/category/category.component';
 
 @Component({
   selector: 'app-form-wizard',
@@ -16,13 +17,17 @@ import {Form, QuestionType, QuestionValidator} from '../../models/form.model';
     MatStepper,
     MatStepLabel,
     MatButton,
-    RouterLink
+    RouterLink,
+    CategoryComponent,
+    MatStepperPrevious,
+    MatStepperNext
   ],
   templateUrl: './form-wizard.component.html',
   styleUrl: './form-wizard.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormWizardComponent {
+  fb = inject(FormBuilder);
   formService = inject(FormService);
   breakpointObserver = inject(BreakpointObserver);
   formId = inject(ActivatedRoute).snapshot.params['id'];
@@ -52,35 +57,29 @@ export class FormWizardComponent {
 
       step.categories.forEach(category => {
         category.questions.forEach(question => {
-          controls[question.id] = new FormControl(
+          controls[question.id] = this.fb.control(
             this.getInitialControlValue(question.type),
             this.mapValidators(question.validators)
           );
         });
       });
 
-      stepGroups[step.id] = new FormGroup(controls);
+      stepGroups[step.id] = this.fb.group(controls);
     });
 
-    this.form = new FormGroup(stepGroups);
+    this.form = this.fb.group(stepGroups);
   }
 
   private getInitialControlValue(type: QuestionType) {
     switch (type) {
-      case 'text': {
-        return '';
-      }
       case 'number': {
         return null;
       }
       case 'checkbox': {
-        return false
-      }
-      case 'select': {
-        return '';
+        return false;
       }
       default: {
-        return null;
+        return '';
       }
     }
   }
