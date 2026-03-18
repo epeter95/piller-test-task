@@ -23,5 +23,5 @@ import {FormControl, ReactiveFormsModule} from '@angular/forms';
 })
 export class QuestionComponent {
   question = input.required<Question>();
-  control = new FormControl();
+  questionControl = input.required<FormControl>();
 }

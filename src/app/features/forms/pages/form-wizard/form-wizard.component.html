@@ -9,8 +9,8 @@
           </ng-template>
           @for (category of step.categories; track category.name) {
             <app-category
-              [category]="category">
-            </app-category>
+              [category]="category"
+              [stepGroup]="getStepGroup(step.id)"/>
           }
           <div class="stepper-buttons">
             <button mat-button matStepperPrevious>

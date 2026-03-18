@@ -49,6 +49,10 @@ export class FormWizardComponent {
   ));
   form!: FormGroup;
 
+  getStepGroup(stepId: string): FormGroup {
+    return this.form.controls[stepId] as FormGroup;
+  }
+
   private buildForm(formElement: Form) {
     const stepGroups: Record<string, FormGroup> = {};
 

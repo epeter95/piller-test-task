@@ -1,39 +1,37 @@
-@if (question(); as question) {
-  <div class="question">
+<div class="question">
 
-    @switch (question.type) {
+  @switch (question().type) {
 
-      @case ('text') {
-        <mat-form-field appearance="outline">
-          <mat-label>{{ question.label }}</mat-label>
-          <input matInput [formControl]="control"/>
-        </mat-form-field>
-      }
-      @case ('number') {
-        <mat-form-field appearance="outline">
-          <mat-label>{{ question.label }}</mat-label>
-          <input matInput type="number" [formControl]="control"/>
-        </mat-form-field>
-      }
-      @case ('select') {
-        <mat-form-field appearance="outline">
-          <mat-label>{{ question.label }}</mat-label>
-          <mat-select [formControl]="control">
-            @for (option of question.selectOptions; track option) {
-              <mat-option [value]="option">
-                {{ option }}
-              </mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-      }
-      @case ('checkbox') {
-        <mat-checkbox [formControl]="control">
-          {{ question.label }}
-        </mat-checkbox>
-      }
-
+    @case ('text') {
+      <mat-form-field appearance="outline">
+        <mat-label>{{ question().label }}</mat-label>
+        <input matInput [formControl]="questionControl()"/>
+      </mat-form-field>
+    }
+    @case ('number') {
+      <mat-form-field appearance="outline">
+        <mat-label>{{ question().label }}</mat-label>
+        <input matInput type="number" [formControl]="questionControl()"/>
+      </mat-form-field>
+    }
+    @case ('select') {
+      <mat-form-field appearance="outline">
+        <mat-label>{{ question().label }}</mat-label>
+        <mat-select [formControl]="questionControl()">
+          @for (option of question().selectOptions; track option) {
+            <mat-option [value]="option">
+              {{ option }}
+            </mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    }
+    @case ('checkbox') {
+      <mat-checkbox [formControl]="questionControl()">
+        {{ question().label }}
+      </mat-checkbox>
     }
 
-  </div>
-}
+  }
+
+</div>

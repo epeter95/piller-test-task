@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, input} from '@angular/core';
 import {Category} from '../../models/form.model';
 import {QuestionComponent} from '../question/question.component';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-category',
@@ -13,5 +14,9 @@ import {QuestionComponent} from '../question/question.component';
 })
 export class CategoryComponent {
   category = input.required<Category>();
-  // formGroup = input.required<FormGroup>();
+  stepGroup = input.required<FormGroup>();
+
+  getControl(questionId: string): FormControl {
+    return this.stepGroup().controls[questionId] as FormControl;
+  }
 }

@@ -6,6 +6,7 @@
 
     @for (question of category.questions; track question.id) {
       <app-question
+        [questionControl]="getControl(question.id)"
         [question]="question">
       </app-question>
     }
