@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, computed, inject} from '@angular/cor
 import {FormService} from '../../services/form.service';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MatStep, MatStepper, MatStepperNext, MatStepperPrevious} from '@angular/material/stepper';
+import {MatStep, MatStepLabel, MatStepper, MatStepperNext, MatStepperPrevious} from '@angular/material/stepper';
 import {MatButton} from '@angular/material/button';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {map, tap} from 'rxjs';
@@ -20,7 +20,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
     MatButton,
     CategoryComponent,
     MatStepperPrevious,
-    MatStepperNext
+    MatStepperNext,
+    MatStepLabel
   ],
   templateUrl: './form-wizard.component.html',
   styleUrl: './form-wizard.component.scss',

@@ -3,7 +3,10 @@
     <h1>{{ formElement.name }}</h1>
     <mat-stepper [orientation]="orientation()" #stepper linear>
       @for (step of formElement.steps; track step.title) {
-        <mat-step [label]="step.title" [stepControl]="form.controls[step.id]">
+        <mat-step [stepControl]="form.controls[step.id]">
+          <ng-template matStepLabel>
+            <h2>{{ step.title }}</h2>
+          </ng-template>
           @for (category of step.categories; track category.name) {
             <app-category
               [category]="category"
@@ -25,7 +28,10 @@
 
         </mat-step>
       }
-      <mat-step label="Ellenőrzés">
+      <mat-step>
+        <ng-template matStepLabel>
+          <h2>Ellenőrzés</h2>
+        </ng-template>
         <div class="review">
           <p>Ellenőrizze az adatait:</p>
           @for (step of formElement.steps; track step.id) {
@@ -34,7 +40,7 @@
               <strong>{{ category.name }}</strong>
               <ul>
                 @for (question of category.questions; track question.id) {
-                  <li>{{ question.label }}: {{ getReviewFormValue(step.id, question.id) }}</li>
+                  <li><h4>{{ question.label }}</h4>: {{ getReviewFormValue(step.id, question.id) }}</li>
                 }
               </ul>
             }

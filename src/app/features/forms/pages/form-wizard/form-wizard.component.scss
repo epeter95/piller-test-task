@@ -7,11 +7,21 @@
   max-width: 75rem;
   width: 100%;
   margin: 0 auto;
-}
 
-.stepper-buttons {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  justify-content: end;
+  h2 {
+    font-size: 1rem;
+  }
+
+  h4 {
+    font-size: 1rem;
+    display: inline;
+    font-weight: normal;
+  }
+
+  .stepper-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: end;
+  }
 }

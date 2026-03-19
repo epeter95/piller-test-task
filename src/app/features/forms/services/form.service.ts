@@ -24,7 +24,7 @@ export class FormService {
   submitForm(data: { [key: string]: number | string | null }) {
     this.loadingService.show();
     return of(true).pipe(
-      delay(2000),
+      delay(1500),
       tap(() => {
         this.loadingService.hide();
       })
