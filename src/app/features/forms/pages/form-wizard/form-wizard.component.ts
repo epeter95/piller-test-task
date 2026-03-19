@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, computed, inject} from '@angular/core';
 import {FormService} from '../../services/form.service';
 import {toSignal} from '@angular/core/rxjs-interop';
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatStep, MatStepper, MatStepperNext, MatStepperPrevious} from '@angular/material/stepper';
 import {MatButton} from '@angular/material/button';
 import {BreakpointObserver} from '@angular/cdk/layout';
@@ -18,7 +18,6 @@ import {MatSnackBar} from '@angular/material/snack-bar';
     MatStep,
     MatStepper,
     MatButton,
-    RouterLink,
     CategoryComponent,
     MatStepperPrevious,
     MatStepperNext
@@ -29,6 +28,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class FormWizardComponent {
   fb = inject(FormBuilder);
+  router = inject(Router);
   formService = inject(FormService);
   snackBar = inject(MatSnackBar);
   breakpointObserver = inject(BreakpointObserver);
@@ -89,7 +89,16 @@ export class FormWizardComponent {
     }
   }
 
-  showToast() {
+  submitForm() {
+    this.formService.submitForm(this.form.value).subscribe({
+      next: () => {
+        this.showToast();
+        this.router.navigate(['/forms']);
+      }
+    })
+  }
+
+  private showToast() {
     this.snackBar.open('A űrlap sikeresen elküldve!', 'Bezár', {duration: 3000, verticalPosition: 'top'});
   }
 
