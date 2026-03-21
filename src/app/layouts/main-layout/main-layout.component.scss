@@ -1,0 +1,28 @@
+.main-layout {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: white; /* important to avoid transparency issues */
+  }
+
+  .content {
+    min-height: 0; // prevent weird scrolling issues
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    padding: 0.5rem;
+  }
+}
